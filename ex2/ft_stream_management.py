@@ -31,16 +31,9 @@ def main(file_stream: IO[str]) -> None:
     print("Accessing file", file_stream.name)
 
     # Store file's content
+    content = None
     try:
         content = file_stream.read().split("\n")
-    except FileNotFoundError as msg:
-            print(
-                "[STDERR]",
-                f"Error reading from file '{file_stream.name}':",
-                " File was not found:",
-                msg,
-                file=sys.stderr
-            )
     except UnicodeDecodeError as msg:
         print(
             "[STDERR]",
@@ -65,16 +58,19 @@ def main(file_stream: IO[str]) -> None:
             msg,
             file=sys.stderr
         )
+    finally:
+        file_stream.close()
+        if file_stream.closed:
+            print(
+                f"File '{file_stream.name}' closed."
+            )
 
+    # Early exit in case of read() fail
+    if not content:
+        return None
+    
     # Print file's content
     print_content(content)
-
-    # Close file
-    file_stream.close()
-    if file_stream.closed:
-        print(
-            f"File '{file_stream.name}' closed."
-        )
 
     # Transform data
     print("Transform data:")
