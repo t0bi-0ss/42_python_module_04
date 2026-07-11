@@ -31,7 +31,40 @@ def main(file_stream: IO[str]) -> None:
     print("Accessing file", file_stream.name)
 
     # Store file's content
-    content = file_stream.read().split("\n")
+    try:
+        content = file_stream.read().split("\n")
+    except FileNotFoundError as msg:
+            print(
+                "[STDERR]",
+                f"Error reading from file '{file_stream.name}':",
+                " File was not found:",
+                msg,
+                file=sys.stderr
+            )
+    except UnicodeDecodeError as msg:
+        print(
+            "[STDERR]",
+            f"Error reading from file '{file_stream.name}':",
+            " Encoding mismatch:",
+            msg,
+            file=sys.stderr
+        )
+    except ValueError as msg:
+        print(
+            "[STDERR]",
+            f"Error reading from file '{file_stream.name}':",
+            " File was already closed, or the operation is invalid:",
+            msg,
+            file=sys.stderr
+        )
+    except OSError as msg:
+        print(
+            "[STDERR]",
+            f"Error reading from file '{file_stream.name}':",
+            " An unexpected system error occured:",
+            msg,
+            file=sys.stderr
+        )
 
     # Print file's content
     print_content(content)
@@ -156,7 +189,8 @@ if __name__ == "__main__":
             "[STDERR]",
             f"Error opening file '{sys.argv[1]}':",
             " An unexpected system error occured:",
-            msg
+            msg,
+            file=sys.stderr
         )
     else:
         main(file_stream)
