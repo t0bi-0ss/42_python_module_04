@@ -31,7 +31,33 @@ def main(file_stream: IO[str]) -> None:
     print("Accessing file", file_stream.name)
 
     # Store file's content
-    content = file_stream.read().split("\n")
+    try:
+        content = file_stream.read().split("\n")
+    except FileNotFoundError as msg:
+            print(
+
+                f"Error reading from file '{file_stream.name}':",
+                " File was not found:",
+                msg
+            )
+    except UnicodeDecodeError as msg:
+        print(
+            f"Error reading from file '{file_stream.name}':",
+            " Encoding mismatch:",
+            msg
+        )
+    except ValueError as msg:
+        print(
+            f"Error reading from file '{file_stream.name}':",
+            " File was already closed, or the operation is invalid:",
+            msg
+        )
+    except OSError as msg:
+        print(
+            f"Error reading from file '{file_stream.name}':",
+            " An unexpected system error occured:",
+            msg
+        )
 
     # Print file's content
     print_content(content)
@@ -59,6 +85,7 @@ def main(file_stream: IO[str]) -> None:
 
     # Write to new file or not
     if new_file_name:
+        new_file_stream = None
         try:
             new_file_stream = open(new_file_name, mode="w")
         except PermissionError as msg:
@@ -79,7 +106,7 @@ def main(file_stream: IO[str]) -> None:
             new_file_stream.write("\n".join(transformed_content))
             print(f"Saving data to '{new_file_name}'")
         finally:
-            if new_file_name:
+            if new_file_stream:
                 new_file_stream.close()
                 if new_file_stream.closed:
                     print(f"Data saved in file '{new_file_name}'")
