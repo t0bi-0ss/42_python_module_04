@@ -15,12 +15,13 @@ def main(file_stream: IO[str]) -> None:
     fragment_num = 1
 
     for line in file_stream:
+        trailing_zeros = 3 - len(str(fragment_num))
+        fragment_label = (
+            f"[FRAGMENT {'0' * trailing_zeros}{fragment_num}]"
+        )
         print(
-            f"[FRAGMENT {'0' * (3 - len(str(fragment_num)))}"
-            + f"{fragment_num}]",
-            line,
-            end=""
-            )
+            fragment_label, line, end=""
+        )
         fragment_num += 1
     print("\n\n---")
 
@@ -34,13 +35,13 @@ if __name__ == "__main__":
                 "Error: no file was passed.",
                 " ft_ancient_text.py usage: ",
                 "python3 ft_ancient_text.py {{file_name}}"
-                )
+            )
         if len(sys.argv) > 2:
             print(
                 "Error: more than one file was passed.",
                 " ft_ancient_text.py usage: ",
                 "python3 ft_ancient_text.py {{file_name}}"
-                )
+            )
         raise SystemExit
 
     try:
@@ -73,4 +74,4 @@ if __name__ == "__main__":
         if file_stream.closed:
             print(
                 f"File '{sys.argv[1]}' closed."
-                )
+            )
