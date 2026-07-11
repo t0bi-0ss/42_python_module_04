@@ -28,12 +28,6 @@ def main(file_stream: IO[str]) -> None:
         fragment_num += 1
     print("\n---")
 
-    file_stream.close()
-    if file_stream.closed:
-        print(
-            f"File '{file_stream.name}' closed."
-        )
-
 
 if __name__ == "__main__":
     arguments_num = len(sys.argv)
@@ -77,3 +71,10 @@ if __name__ == "__main__":
         )
     else:
         main(file_stream)
+    finally:
+        if file_stream:
+            file_stream.close()
+            if file_stream.closed:
+                print(
+                    f"File '{file_stream.name}' closed."
+                )
