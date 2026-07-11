@@ -51,7 +51,11 @@ def main(file_stream: IO[str]) -> None:
     print_content(transformed_content)
 
     # Ask for new file name
-    new_file_name = input("Enter new file name (or empty): ")
+    try:
+        new_file_name = input("Enter new file name (or empty): ")
+    except EOFError:
+        print("\nError: input stream was closed. Setting new file name to ''")
+        new_file_name = ""
 
     # Write to new file or not
     if new_file_name:
