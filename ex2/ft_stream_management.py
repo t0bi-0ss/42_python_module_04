@@ -127,9 +127,10 @@ if __name__ == "__main__":
             file=sys.stderr
         )
         if not sys.argv[1]:
-            print("file path provided was completely empty",
-                  msg,
-                  file=sys.stderr
+            print(
+                "file path provided was completely empty",
+                msg,
+                file=sys.stderr,
             )
         else:
             print(
