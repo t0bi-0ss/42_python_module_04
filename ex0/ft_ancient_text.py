@@ -10,6 +10,8 @@ tasks"""
 def main(file_stream: IO[str]) -> None:
     """Main logic handling"""
 
+    print("=== Cyber Archives Recovery ===")
+    print("Accessing file", file_stream.name)
     print("---\n")
 
     fragment_num = 1
@@ -24,6 +26,12 @@ def main(file_stream: IO[str]) -> None:
         )
         fragment_num += 1
     print("\n\n---")
+
+    file_stream.close()
+    if file_stream.closed:
+        print(
+            f"File '{file_stream.name}' closed."
+        )
 
 
 if __name__ == "__main__":
@@ -67,11 +75,4 @@ if __name__ == "__main__":
             msg
         )
     else:
-        print("=== Cyber Archives Recovery ===")
-        print("Accessing file", file_stream.name)
         main(file_stream)
-        file_stream.close()
-        if file_stream.closed:
-            print(
-                f"File '{sys.argv[1]}' closed."
-            )
