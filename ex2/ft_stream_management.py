@@ -59,6 +59,7 @@ def main(file_stream: IO[str]) -> None:
 
     # Write to new file or not
     if new_file_name:
+        new_file_stream = None
         try:
             new_file_stream = open(new_file_name, mode="w")
         except PermissionError as msg:
@@ -87,7 +88,7 @@ def main(file_stream: IO[str]) -> None:
             new_file_stream.write("\n".join(transformed_content))
             print(f"Saving data to '{new_file_name}'")
         finally:
-            if new_file_name:
+            if new_file_stream:
                 new_file_stream.close()
                 if new_file_stream.closed:
                     print(f"Data saved in file '{new_file_name}'")
