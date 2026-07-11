@@ -50,8 +50,12 @@ def main(file_stream: IO[str]) -> None:
     # Print transformed data
     print_content(transformed_content)
 
+    # Rename sys.stdin
+    io = sys.stdin
+
     # Ask for new file name
-    new_file_name = input("Enter new file name (or empty): ")
+    print("Enter new file name (or empty): ", end="", flush=True)
+    new_file_name = io.readline().strip("\n")
 
     # Write to new file or not
     if new_file_name:
