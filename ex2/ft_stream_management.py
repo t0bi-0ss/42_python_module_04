@@ -88,21 +88,21 @@ def main(file_stream: IO[str]) -> None:
         except PermissionError as msg:
             print(
                 "[STDERR]",
-                f"Error opening file '{new_file_name}':",
+                f"Error opening file '{new_file_name}' in 'write' mode:",
                 msg,
                 file=sys.stderr
             )
         except IsADirectoryError as msg:
             print(
                 "[STDERR]",
-                f"Error opening file '{new_file_name}':",
+                f"Error opening file '{new_file_name}' in 'write' mode:",
                 msg,
                 file=sys.stderr
             )
         except OSError as msg:
             print(
                 "[STDERR]",
-                f"Error opening file '{new_file_name}':",
+                f"Error opening file '{new_file_name}' in 'write' mode:",
                 " An unexpected system error occured:",
                 msg,
                 file=sys.stderr
