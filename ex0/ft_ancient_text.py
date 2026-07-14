@@ -18,13 +18,7 @@ def main(file_stream: IO[str]) -> None:
     content = file_stream.read().split("\n")
 
     for line in content:
-        trailing_zeros = 3 - len(str(fragment_num))
-        fragment_label = (
-            f"[FRAGMENT {'0' * trailing_zeros}{fragment_num}]"
-        )
-        print(
-            fragment_label, line
-        )
+        print(line)
         fragment_num += 1
     print("\n---")
 
