@@ -25,7 +25,7 @@ def main(file_stream: IO[str]) -> None:
     print("Accessing file", file_stream.name)
 
     # Store file's content
-    content = ""
+    content = []
     try:
         content = file_stream.read().split("\n")
     except UnicodeDecodeError as msg:
