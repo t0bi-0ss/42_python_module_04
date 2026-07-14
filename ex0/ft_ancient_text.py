@@ -36,14 +36,14 @@ if __name__ == "__main__":
         if len(sys.argv) < 2:
             print(
                 "Error: no file was passed.",
-                " ft_ancient_text.py usage: ",
-                "python3 ft_ancient_text.py {{file_name}}"
+                "Usage:",
+                "ft_ancient_text.py <file>"
             )
         if len(sys.argv) > 2:
             print(
                 "Error: more than one file was passed.",
-                " ft_ancient_text.py usage: ",
-                "python3 ft_ancient_text.py {{file_name}}"
+                "Usage:",
+                "ft_ancient_text.py <file>"
             )
         raise SystemExit
 
