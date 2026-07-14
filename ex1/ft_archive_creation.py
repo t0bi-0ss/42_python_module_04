@@ -83,15 +83,15 @@ def main(file_stream: IO[str]) -> None:
             new_file_stream = open(new_file_name, mode="w")
         except PermissionError as msg:
             print(
-                f"Error opening file '{new_file_name}':", msg
+                f"Error opening file '{new_file_name}' in 'write' mode:", msg
             )
         except IsADirectoryError as msg:
             print(
-                f"Error opening file '{new_file_name}':", msg
+                f"Error opening file '{new_file_name}' in 'write' mode:", msg
             )
         except OSError as msg:
             print(
-                f"Error opening file '{new_file_name}':",
+                f"Error opening file '{new_file_name}' in 'write' mode:",
                 " An unexpected system error occured:",
                 msg
             )
