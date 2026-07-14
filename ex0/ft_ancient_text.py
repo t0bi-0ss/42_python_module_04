@@ -47,6 +47,7 @@ if __name__ == "__main__":
             )
         raise SystemExit
 
+    file_stream = None
     try:
         file_stream = open(sys.argv[1])
     except FileNotFoundError as msg:
@@ -55,6 +56,7 @@ if __name__ == "__main__":
             print("file path provided was completely empty", msg)
         else:
             print(msg)
+
     except PermissionError as msg:
         print(
             f"Error opening file '{sys.argv[1]}':", msg
