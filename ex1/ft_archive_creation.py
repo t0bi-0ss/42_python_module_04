@@ -25,7 +25,7 @@ def main(file_stream: IO[str]) -> None:
     print("Accessing file", file_stream.name)
 
     # Store file's content
-    content = None
+    content = ""
     try:
         content = file_stream.read().split("\n")
     except UnicodeDecodeError as msg:
@@ -46,19 +46,21 @@ def main(file_stream: IO[str]) -> None:
             " An unexpected system error occured:",
             msg
         )
+    else:
+
+        # If read() failed
+        if not content:
+            return None
+
+        # Print file's content
+        print_content(content)
+
     finally:
         file_stream.close()
         if file_stream.closed:
             print(
                 f"File '{file_stream.name}' closed."
             )
-
-    # If read() failed
-    if not content:
-        return None
-
-    # Print file's content
-    print_content(content)
 
     # Transform data
     print("Transform data:")
@@ -101,7 +103,6 @@ def main(file_stream: IO[str]) -> None:
                 new_file_stream.close()
                 if new_file_stream.closed:
                     print(f"Data saved in file '{new_file_name}'")
-
     else:
         print("Not saving data")
 
