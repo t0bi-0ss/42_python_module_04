@@ -62,7 +62,7 @@ def main(file_stream: IO[str]) -> None:
     # Early exit in case of read() fail
     if not content:
         return None
-    
+
     # Print file's content
     print_content(content)
 
@@ -129,13 +129,13 @@ if __name__ == "__main__":
             print(
                 "Error: no file was passed.",
                 " ft_ancient_text.py usage: ",
-                "python3 ft_ancient_text.py {{file_name}}"
+                "python3 ft_ancient_text.py <file_name>"
             )
         if len(sys.argv) > 2:
             print(
                 "Error: more than one file was passed.",
                 " ft_ancient_text.py usage: ",
-                "python3 ft_ancient_text.py {{file_name}}"
+                "python3 ft_ancient_text.py <file_name>"
             )
         raise SystemExit
 
@@ -151,7 +151,7 @@ if __name__ == "__main__":
         )
         if not sys.argv[1]:
             print(
-                "file path provided was completely empty",
+                "file path provided was completely empty.",
                 msg,
                 file=sys.stderr,
             )
